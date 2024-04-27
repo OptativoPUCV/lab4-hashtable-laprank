@@ -51,14 +51,14 @@ void insertMap(HashMap * map, char * key, void * value) {
 
 void enlarge(HashMap * map) {
     enlarge_called = 1;//no borrar (testing purposes)  
-    Pair ** aux = map->buckets;
+    Pair **aux = map->buckets;
     long i;
-    map->capacity = map->capacity*2+1;
-    map->buckets = (Pair **)calloc(map->capacity,sizeof(Pair *));
+    map->capacity = map->capacity * 2 + 1;
+    map->buckets = (Pair **)calloc(map->capacity, sizeof(Pair *));
     map->size = 0;
-    for(i=0;i<map->capacity;i++){
-        if(aux[i]!=NULL){
-            insertMap(map,aux[i]->key,aux[i]->value);
+    for (i = 0; i < map->capacity / 2; i++) {
+        if (aux[i] != NULL) {
+            insertMap(map, aux[i]->key, aux[i]->value);
         }
     }
     free(aux);
